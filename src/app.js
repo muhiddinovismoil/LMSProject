@@ -11,6 +11,7 @@ app.use(morgan('dev'))
 // ERROR HANDLE
 // app.use()
 
+// set up
 app.get('/api/v1/setup', async (req, res) => {
     await createUserTable()
     res.send('Table created!.')
