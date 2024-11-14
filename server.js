@@ -8,7 +8,6 @@ const bootstrap = async () => {
         app.listen(config.app.port, () => {
             logger.info(`server running on port: ${config.app.port}`)
         })
-        logger.info((await pool.query('SELECT now()')).rows)
     } catch (error) {
         logger.error(error)
     }

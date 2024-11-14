@@ -1,5 +1,6 @@
 import express from 'express'
 import morgan from 'morgan'
+import { createUserTable } from './schema/index.js'
 
 const app = express()
 
@@ -10,8 +11,9 @@ app.use(morgan('dev'))
 // ERROR HANDLE
 // app.use()
 
-app.get('/', (req, res) => {
-    res.send('ok')
+app.get('/api/v1/setup', async (req, res) => {
+    await createUserTable()
+    res.send('Table created!.')
 })
 
 export default app

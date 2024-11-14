@@ -1,3 +1,5 @@
 {
-    "cSpell.words": ["alphanum", "guli", "qwer"]
+    "editor.codeActionsOnSave": ["source.fixAll"],
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
 }

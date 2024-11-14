@@ -3,9 +3,9 @@ import pool from '../../databases/index.js'
 
 export const createUserTable = async () => {
     try {
-        await pool.query(`
-          CREATE TYPE USER_ROLE AS ENUM('user', 'admin', 'manager');
-        `)
+        // await pool.query(`
+        //   CREATE TYPE USER_ROLE AS ENUM('user', 'admin', 'manager');
+        // `)
 
         await pool.query(`
           CREATE TABLE IF NOT EXISTS users (
