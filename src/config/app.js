@@ -4,7 +4,7 @@ config()
 
 export default {
     app: {
-        port: process.env.port,
+        port: process.env.PORT,
         node_env: process.env.NODE_ENV,
     },
 }
