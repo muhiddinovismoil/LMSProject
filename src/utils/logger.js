@@ -13,5 +13,3 @@ export const logger = createLogger({
         new transports.File({ filename: 'application.log' }),
     ],
 })
-
-logger.error('salom')
