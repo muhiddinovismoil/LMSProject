@@ -4,11 +4,14 @@ export const logger = createLogger({
     level: 'silly',
     format: format.combine(
         format.timestamp(),
-        format.json(),
-        format.colorize({ all: true })
+        // format.json(),
+        format.prettyPrint(),
+        format.colorize({ all: true }),
     ),
     transports: [
         new transports.Console(),
         new transports.File({ filename: 'application.log' }),
     ],
 })
+
+logger.error('salom')
