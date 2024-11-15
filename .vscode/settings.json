@@ -1,7 +1,9 @@
 {
     "eslint.enable": true,
     "editor.codeActionsOnSave": ["source.fixAll", "source.fixAll.eslint"],
-    "path-intellisense.extensionOnImport": false,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "[javascript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    }
 }
