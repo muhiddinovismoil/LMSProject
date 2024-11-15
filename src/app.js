@@ -19,6 +19,4 @@ app.get('/api/v1/setup', async (req, res) => {
     res.send('Table created!.')
 })
 
-console.log('a')
-
 export default app
