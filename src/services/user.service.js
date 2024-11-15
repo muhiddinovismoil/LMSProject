@@ -1,14 +1,28 @@
-import { logger } from '../utils/logger.js'
 import pool from '../databases/index.js'
-import { comparePassword, generateToken, hashPassword } from '../utils/index.js'
+import {
+    comparePassword,
+    generateOtp,
+    generateToken,
+    hashPassword,
+    logger,
+    sendMail,
+    UserInputError,
+} from '../utils/index.js'
 
 export const register = async (user) => {
     try {
         const currentUser = await findUser('email', user.email)
 
         if (currentUser) {
-            throw new Error('user already exists!')
+            throw new UserInputError('user email already exists!')
         }
+        const otp = generateOtp()
+
+        sendMail(
+            user.email,
+            'OTP',
+            `<h1>Bu sizning OTP :${otp}iz buni begona qo'llarga bermang!</h1>`,
+        )
 
         const result = await createUser(user)
 

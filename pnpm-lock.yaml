@@ -22,6 +22,12 @@ importers:
             morgan:
                 specifier: ^1.10.0
                 version: 1.10.0
+            nodemailer:
+                specifier: ^6.9.16
+                version: 6.9.16
+            otp-generator:
+                specifier: ^4.0.1
+                version: 4.0.1
             pg:
                 specifier: ^8.13.1
                 version: 8.13.1
@@ -1970,6 +1976,13 @@ packages:
             encoding:
                 optional: true
 
+    nodemailer@6.9.16:
+        resolution:
+            {
+                integrity: sha512-psAuZdTIRN08HKVd/E8ObdV6NO7NTBY3KsC30F7M4H1OnmLCUNaS56FpYxyb26zWLSyYF9Ozch9KYHhHegsiOQ==,
+            }
+        engines: { node: '>=6.0.0' }
+
     nopt@5.0.0:
         resolution:
             {
@@ -2094,6 +2107,13 @@ packages:
                 integrity: sha512-6IpQ7mKUxRcZNLIObR0hz7lxsapSSIYNZJwXPGeF0mTVqGKFIXj1DQcMoT22S3ROcLyY/rz0PWaWZ9ayWmad9g==,
             }
         engines: { node: '>= 0.8.0' }
+
+    otp-generator@4.0.1:
+        resolution:
+            {
+                integrity: sha512-2TJ52vUftA0+J3eque4wwVtpaL4/NdIXDL0gFWFJFVUAZwAN7+9tltMhL7GCNYaHJtuONoier8Hayyj4HLbSag==,
+            }
+        engines: { node: '>=14.10.0' }
 
     p-limit@3.1.0:
         resolution:
@@ -4111,6 +4131,8 @@ snapshots:
         dependencies:
             whatwg-url: 5.0.0
 
+    nodemailer@6.9.16: {}
+
     nopt@5.0.0:
         dependencies:
             abbrev: 1.1.1
@@ -4192,6 +4214,8 @@ snapshots:
             prelude-ls: 1.2.1
             type-check: 0.4.0
             word-wrap: 1.2.5
+
+    otp-generator@4.0.1: {}
 
     p-limit@3.1.0:
         dependencies:

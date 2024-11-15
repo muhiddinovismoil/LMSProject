@@ -14,7 +14,7 @@ export const generateToken = async (prop, payload) => {
 
 // console.log(await generateToken("access", { sub: 1 }))
 
-export const isvalidToken = async (prop, token) => {
+export const verifyToken = async (prop, token) => {
     try {
         const option = config.jwt[prop]
 
