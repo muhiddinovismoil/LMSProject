@@ -1,7 +1,6 @@
 import express from 'express'
 import morgan from 'morgan'
-import { createUserTable } from './schema/index.js'
-import { authRoutes } from './routes/index.js'
+import todoRoutes from './routes/index.js'
 
 const app = express()
 
@@ -15,12 +14,12 @@ app.use(morgan('dev'))
 // set up
 
 // auth
-app.use('/api/v1/auth', authRoutes)
+app.use('/api/v1', todoRoutes)
 
-app.get('/api/v1/setup', async (req, res) => {
-    await createUserTable()
-    res.send('Table created!.')
-})
+// app.get('/api/v1/setup', async (req, res) => {
+//     await createUserTable()
+//     res.send('Table created!.')
+// })
 
 app.use((err, req, res, next) => {
     if (err) {

@@ -1,14 +1,12 @@
 import app from './src/app.js'
-import { config } from './src/config/index.js'
-import { logger } from './src/utils/logger.js'
 
 const bootstrap = async () => {
     try {
-        app.listen(config.app.port, () => {
-            logger.info(`server running on port: ${config.app.port}`)
+        app.listen(4000, () => {
+            console.info(`server running on port: ${4000}`)
         })
     } catch (error) {
-        logger.error(error)
+        console.error(error)
     }
 }
 bootstrap()
