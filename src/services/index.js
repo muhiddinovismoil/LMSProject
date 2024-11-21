@@ -47,4 +47,11 @@ export const Service = {
             throw new Error(error)
         }
     },
+    findByUsername(username) {
+        try {
+            return db.select('*').from('users').where('username', '=', username)
+        } catch (error) {
+            throw new Error(error)
+        }
+    },
 }
