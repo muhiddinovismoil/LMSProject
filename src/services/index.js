@@ -54,4 +54,11 @@ export const Service = {
             throw new Error(error)
         }
     },
+    findById(id) {
+        try {
+            return db.select('*').from('users').where('id', '=', id)
+        } catch (error) {
+            throw new Error(error)
+        }
+    },
 }

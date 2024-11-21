@@ -2,11 +2,12 @@ import express from 'express'
 import morgan from 'morgan'
 import passport from 'passport'
 import session from 'express-session'
-import LocalStrategy from 'passport-local'
 import cookieParser from 'cookie-parser'
-
 import todoRoutes from './routes/index.js'
-import { Service } from './services/index.js'
+// import "./strategies/passport-local.js"
+// import "./strategies/passport-berear.js"
+import './strategies/passport-jwt.js'
+import jwt from 'jsonwebtoken'
 
 const app = express()
 
@@ -28,50 +29,65 @@ app.use(
 app.use(passport.initialize())
 app.use(passport.session())
 
-passport.use(
-    new LocalStrategy(async function (username, password, done) {
-        try {
-            const currentUser = await Service.findByUsername(username)
-            if (!currentUser) {
-                return done(null, false, {
-                    message: 'Incorrect username or password.',
-                })
-            }
+// auth
+// app.use(
+//     '/cookies',
+//     (req, res, next) => {
+//         try {
+//             console.log({ cookies: req.cookies })
 
-            done(null, currentUser)
-
-            // User.findOne({ username: username }, function (err, user) {
-            //     if (err) { return done(err); }
-            //     if (!user) { return done(null, false); }
-            //     if (!user.verifyPassword(password)) { return done(null, false); }
-            //     return done(null, user);
-            // });
-        } catch (error) {
-            done(error)
-        }
-    }),
-)
-
-// ERROR HANDLE
-// app.use()
-
-// set up
+//             // console.log({ setruession: req.session })
+//             res.cookie('rememberme', 'ASSALOMY ALAYKUM')
+//             res.send('ok')
+//         } catch (error) {
+//             next(error)
+//         }
+//     },
+// )
 
 // auth
 app.use(
     '/test',
-    passport.authenticate('local', {
+    passport.authenticate('jwt', {
         session: false,
     }),
     (req, res, next) => {
         try {
-            console.log(req.user)
+            // eslint-disable-next-line no-console
+            console.log({ user: req.user })
+            // console.log({ setruession: req.session })
             res.send('ok')
         } catch (error) {
             next(error)
         }
     },
 )
+app.use('/token', (req, res, next) => {
+    try {
+        const payload = {
+            name: 'eshmat',
+            role: 'user',
+        }
+
+        const token = jwt.sign(payload, 'qwer', {
+            expiresIn: '1h',
+        })
+        res.send({ token })
+    } catch (error) {
+        next(error)
+    }
+})
+
+// User.findOne({ username: username }, function (err, user) {
+//     if (err) { return done(err); }
+//     if (!user) { return done(null, false); }
+//     if (!user.verifyPassword(password)) { return done(null, false); }
+//     return done(null, user);
+// });
+// ERROR HANDLE
+// app.use()
+
+// set up
 
 app.use('/api/v1', todoRoutes)
 
