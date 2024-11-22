@@ -4,9 +4,10 @@ import passport from 'passport'
 import session from 'express-session'
 import cookieParser from 'cookie-parser'
 import todoRoutes from './routes/index.js'
+import { googleRouter } from './routes/google.routes.js'
 // import "./strategies/passport-local.js"
 // import "./strategies/passport-berear.js"
-import './strategies/passport-jwt.js'
+// import './strategies/passport-jwt.js'
 import jwt from 'jsonwebtoken'
 
 const app = express()
@@ -29,6 +30,9 @@ app.use(
 app.use(passport.initialize())
 app.use(passport.session())
 
+// ROUTES
+app.use('/api/v1', googleRouter)
+
 // auth
 // app.use(
 //     '/cookies',
@@ -46,37 +50,37 @@ app.use(passport.session())
 // )
 
 // auth
-app.use(
-    '/test',
-    passport.authenticate('jwt', {
-        session: false,
-    }),
-    (req, res, next) => {
-        try {
-            // eslint-disable-next-line no-console
-            console.log({ user: req.user })
-            // console.log({ setruession: req.session })
-            res.send('ok')
-        } catch (error) {
-            next(error)
-        }
-    },
-)
-app.use('/token', (req, res, next) => {
-    try {
-        const payload = {
-            name: 'eshmat',
-            role: 'user',
-        }
+// app.use(
+//     '/test',
+//     passport.authenticate('jwt', {
+//         session: false,
+//     }),
+//     (req, res, next) => {
+//         try {
+//             // eslint-disable-next-line no-console
+//             console.log({ user: req.user })
+//             // console.log({ setruession: req.session })
+//             res.send('ok')
+//         } catch (error) {
+//             next(error)
+//         }
+//     },
+// )
+// app.use('/token', (req, res, next) => {
+//     try {
+//         const payload = {
+//             name: 'eshmat',
+//             role: 'user',
+//         }
 
-        const token = jwt.sign(payload, 'qwer', {
-            expiresIn: '1h',
-        })
-        res.send({ token })
-    } catch (error) {
-        next(error)
-    }
-})
+//         const token = jwt.sign(payload, 'qwer', {
+//             expiresIn: '1h',
+//         })
+//         res.send({ token })
+//     } catch (error) {
+//         next(error)
+//     }
+// })
 
 // User.findOne({ username: username }, function (err, user) {
 //     if (err) { return done(err); }

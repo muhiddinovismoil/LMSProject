@@ -1,0 +1,33 @@
+
+> e-commerce@1.0.0 start:dev
+> node --watch --env-file=.env server.js
+
+server running on port: 3000
+[0mGET /api/v1/google [33m404[0m 7.209 ms - 152[0m
+[0mGET /api/v1/auth/google [36m302[0m 2.435 ms - 0[0m
+{
+  accessToken: 'ya29.a0AeDClZCCbqoxdk6s9FJmP2QTh1P4BiPWdgYRREUz88z8kdyDGfKOlA3H3chireIR3fqvmhQmNKDBkQVwX3cC05e3BKcEdjuOgPVhCsqhowR1Lv9L_YjHF1rb7qDLrMyVOoQgkoSZLACT0PM2WEBFOgiCvr2Y1GEiOAaCgYKAZkSARESFQHGX2MipV9OM0tO8Phprro1gehXSg0169',
+  refreshToken: undefined,
+  profile: {
+    id: '107697802490875170872',
+    displayName: 'Xamidullo Xudoyberdiyev',
+    name: { familyName: 'Xudoyberdiyev', givenName: 'Xamidullo' },
+    photos: [ [Object] ],
+    provider: 'google',
+    _raw: '{\n' +
+      '  "sub": "107697802490875170872",\n' +
+      '  "name": "Xamidullo Xudoyberdiyev",\n' +
+      '  "given_name": "Xamidullo",\n' +
+      '  "family_name": "Xudoyberdiyev",\n' +
+      '  "picture": "https://lh3.googleusercontent.com/a/ACg8ocJxDOi8WfzW4VOALW3YbNxF9wPQtDs7ekZ1h8-weaOOKTVKgeDy\\u003ds96-c"\n' +
+      '}',
+    _json: {
+      sub: '107697802490875170872',
+      name: 'Xamidullo Xudoyberdiyev',
+      given_name: 'Xamidullo',
+      family_name: 'Xudoyberdiyev',
+      picture: 'https://lh3.googleusercontent.com/a/ACg8ocJxDOi8WfzW4VOALW3YbNxF9wPQtDs7ekZ1h8-weaOOKTVKgeDy=s96-c'
+    }
+  },
+  done: [Function: verified]
+}
