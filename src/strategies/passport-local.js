@@ -3,9 +3,16 @@ import LocalStrategy from 'passport-local'
 import { Service } from '../services/index.js'
 
 export default passport.use(
-    new LocalStrategy(async function (username, password, done) {
+    new LocalStrategy({ usernameField: 'email' }, async function (
+        username,
+        password,
+        done,
+    ) {
         try {
-            const currentUser = await Service.findByUsername(username)
+            console.log({ username, password })
+            // const currentUser = await Service.findByUsername(username)
+            const currentUser = await Service.findByEmail(username)
+            console.log({ currentUser })
             if (!currentUser) {
                 return done(null, false, {
                     message: 'Incorrect username or password.',

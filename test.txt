@@ -31,3 +31,19 @@ server running on port: 3000
   },
   done: [Function: verified]
 }
+c[32mRestarting 'server.js'[39m
+server running on port: 3000
+c[32mRestarting 'server.js'[39m
+server running on port: 3000
+c[32mRestarting 'server.js'[39m
+server running on port: 3000
+c[32mRestarting 'server.js'[39m
+server running on port: 3000
+c[32mRestarting 'server.js'[39m
+server running on port: 3000
+c[32mRestarting 'server.js'[39m
+server running on port: 3000
+c[32mRestarting 'server.js'[39m
+server running on port: 3000
+c[32mRestarting 'server.js'[39m
+server running on port: 3000

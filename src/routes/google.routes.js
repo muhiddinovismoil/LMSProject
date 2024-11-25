@@ -4,21 +4,22 @@ import '../strategies/passport-google.js'
 
 export const googleRouter = Router()
 
-googleRouter.get('/profile', (req, res) => {
+googleRouter.get('/auth/profile', (req, res) => {
     // eslint-disable-next-line no-console
-    console.log(req.user)
+    console.log({ isAuthenticated: req.isAuthenticated() })
     res.send('ok')
 })
 
 googleRouter.get(
     '/auth/google',
-    passport.authenticate('google', { scope: ['profile'] }),
+    passport.authenticate('google', {
+        scope: ['profile', 'email'],
+    }),
 )
-
 googleRouter.get(
     '/auth/google/callback',
     passport.authenticate('google', { failureRedirect: '/' }),
     function (req, res) {
-        res.redirect('/api/v1/profile')
+        res.redirect('/api/v1/auth/profile')
     },
 )

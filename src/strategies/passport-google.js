@@ -16,6 +16,7 @@ export default passport.use(
                 profile,
                 done,
             })
+            done(null, profile)
         },
     ),
 )

@@ -5,10 +5,6 @@ import session from 'express-session'
 import cookieParser from 'cookie-parser'
 import todoRoutes from './routes/index.js'
 import { googleRouter } from './routes/google.routes.js'
-// import "./strategies/passport-local.js"
-// import "./strategies/passport-berear.js"
-// import './strategies/passport-jwt.js'
-import jwt from 'jsonwebtoken'
 
 const app = express()
 
@@ -22,7 +18,7 @@ app.use(
         resave: false,
         saveUninitialized: true,
         cookie: {
-            secure: true,
+            secure: false,
         },
     }),
 )
@@ -30,8 +26,9 @@ app.use(
 app.use(passport.initialize())
 app.use(passport.session())
 
-// ROUTES
 app.use('/api/v1', googleRouter)
+
+// ROUTES
 
 // auth
 // app.use(
@@ -99,6 +96,9 @@ app.use('/api/v1', todoRoutes)
 //     await createUserTable()
 //     res.send('Table created!.')
 // })
+app.use('/error', (req, res) => {
+    return res.send('not found')
+})
 
 app.use((err, req, res, next) => {
     if (err) {
