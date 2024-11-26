@@ -1,17 +1,6 @@
-const a = () => {
-    console.log('end')
-}
+import { Hono } from 'hono'
+const app = new Hono()
 
-const b = () => {
-    a()
-}
+app.get('/', (c) => c.text('Hono!'))
 
-const c = () => {
-    b()
-}
-
-const d = () => {
-    c()
-}
-
-d()
+export default app

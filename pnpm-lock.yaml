@@ -22,6 +22,9 @@ importers:
             express-session:
                 specifier: ^1.18.1
                 version: 1.18.1
+            hono:
+                specifier: ^4.6.12
+                version: 4.6.12
             jsonwebtoken:
                 specifier: ^9.0.2
                 version: 9.0.2
@@ -31,6 +34,9 @@ importers:
             morgan:
                 specifier: ^1.10.0
                 version: 1.10.0
+            node-device-detector:
+                specifier: ^2.1.6
+                version: 2.1.6
             nodemailer:
                 specifier: ^6.9.16
                 version: 6.9.16
@@ -1483,6 +1489,13 @@ packages:
             }
         engines: { node: '>= 0.4' }
 
+    hono@4.6.12:
+        resolution:
+            {
+                integrity: sha512-eHtf4kSDNw6VVrdbd5IQi16r22m3s7mWPLd7xOMhg1a/Yyb1A0qpUFq8xYMX4FMuDe1nTKeMX5rTx7Nmw+a+Ag==,
+            }
+        engines: { node: '>=16.9.0' }
+
     http-errors@2.0.0:
         resolution:
             {
@@ -2123,6 +2136,13 @@ packages:
             {
                 integrity: sha512-eh0GgfEkpnoWDq+VY8OyvYhFEzBk6jIYbRKdIlyTiAXIVJ8PyBaKb0rp7oDtoddbdoHWhq8wwr+XZ81F1rpNdA==,
             }
+
+    node-device-detector@2.1.6:
+        resolution:
+            {
+                integrity: sha512-emwv6CQZC+/zRIW/7KrjJO0dCpVkIaJ4lvZKDibkJVpXvTUlMdrqW7sSyTjrVihIAjdwnY2He0Pp1LzMlBjXmw==,
+            }
+        engines: { node: '>= 10.x', npm: '>= 6.x' }
 
     node-fetch@2.7.0:
         resolution:
@@ -4125,6 +4145,8 @@ snapshots:
         dependencies:
             function-bind: 1.1.2
 
+    hono@4.6.12: {}
+
     http-errors@2.0.0:
         dependencies:
             depd: 2.0.0
@@ -4467,6 +4489,10 @@ snapshots:
     negotiator@0.6.3: {}
 
     node-addon-api@5.1.0: {}
+
+    node-device-detector@2.1.6:
+        dependencies:
+            js-yaml: 4.1.0
 
     node-fetch@2.7.0:
         dependencies:
