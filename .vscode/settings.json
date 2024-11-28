@@ -7,5 +7,6 @@
         "editor.defaultFormatter": "vscode.typescript-language-features"
     },
     "workbench.colorTheme": "One Dark Pro Darker",
-    "cSpell.words": ["asdvfbfgtre", "resave"]
+    "cSpell.words": ["asdvfbfgtre", "resave"],
+    "editor.minimap.enabled": false
 }

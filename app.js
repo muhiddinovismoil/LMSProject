@@ -1,6 +1,15 @@
-import { Hono } from 'hono'
-const app = new Hono()
+const str = 'abc'
 
-app.get('/', (c) => c.text('Hono!'))
+const iterator = str[Symbol.iterator]()
 
-export default app
+console.log(iterator.next())
+console.log(iterator.next())
+console.log(iterator.next())
+console.log(iterator.next())
+
+// import { Hono } from 'hono'
+// const app = new Hono()
+
+// app.get('/', (c) => c.text('Hono!'))
+
+// export default app
