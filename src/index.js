@@ -1,52 +1,85 @@
-/**
- *
- * @param {number} a
- * @param {number} b
- * @returns
- */
-const add = (a, b) => {
-    return a + b
+import { Sequelize, DataTypes, Model } from 'sequelize'
+
+const sequelize = new Sequelize(
+    'postgres://postgres:postgres@localhost:5432/orm',
+)
+
+// const sequelize = new Sequelize('postgres://user:pass@example.com:5432/dbname') // Example for postgres
+// Option 3: Passing parameters separately (other dialects)
+// const sequelize = new Sequelize('database', 'username', 'password', {
+//   host: 'localhost',
+//   dialect: /* one of 'mysql' | 'postgres' | 'sqlite' | 'mariadb' | 'mssql' | 'db2' | 'snowflake' | 'oracle' */
+// });
+
+try {
+    await sequelize.authenticate()
+    console.log('Connection has been established successfully.')
+} catch (error) {
+    console.error('Unable to connect to the database:', error)
 }
 
-/**
- *
- * @param {string} name
- * @param {number} age
- * @param {string} gender
- */
-function Person(name, age, gender) {
-    this.name = name
-    this.age = age
-    this.gender = gender
-}
+// =================== 1 ==================
+// const User = sequelize.define(
+//   'User',
+//   {
+//     // Model attributes are defined here
+//     firstName: {
+//       type: DataTypes.STRING,
+//       allowNull: false,
+//       unique: true
+//     },
+//     lastName: {
+//       type: DataTypes.STRING,
+//       // allowNull defaults to true
+//     },
+//   },
+//   {
+//     // Other model options go here
+//   },
+// );
 
-const person = new Person(1, 'b', true)
+// // `sequelize.define` also returns the model
+// console.log(User === sequelize.models.User); // true
 
-// console.log(person);
+// =================== 2 ==================
+class User extends Model {}
 
-console.log(1)
-const promise = new Promise((resolve) => {
-    console.log(2)
-    resolve()
-    console.log(3)
-})
+User.init(
+    {
+        // Model attributes are defined here
+        id: {
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
+            primaryKey: true,
+        },
+        firstName: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        lastName: {
+            type: DataTypes.STRING,
+            // allowNull defaults to true
+        },
+    },
+    {
+        // Other model options go here
+        sequelize, // We need to pass the connection instance
+        modelName: 'User', // We need to choose the model name
+    },
+)
 
-console.log(4)
+// the defined model is the class itself
+console.log(User === sequelize.models.User) // true
 
-promise
-    .then(() => {
-        console.log(5)
-    })
-    .then(() => {
-        console.log(6)
-    })
+const user = new User({ firstName: 'bekzodbek', lastName: 'Qodirov' })
 
-console.log(7)
+console.log(user)
 
-setTimeout(() => {
-    console.log(8)
-}, 10)
-
-setTimeout(() => {
-    console.log(9)
-}, 0)
+user.save()
+// (async () => {
+//   await sequelize.sync({ force: true });
+//   // Code here
+// })();(async () => {
+//   await sequelize.sync({ force: true });
+//   // Code here
+// })();
