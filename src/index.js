@@ -1,15 +1,8 @@
-import { Sequelize, DataTypes, Model } from 'sequelize'
+import { Sequelize, DataTypes, Model, Op } from 'sequelize'
 
 const sequelize = new Sequelize(
-    'postgres://postgres:postgres@localhost:5432/orm',
+    'postgres://postgres:postgres@localhost:5432/orm_test',
 )
-
-// const sequelize = new Sequelize('postgres://user:pass@example.com:5432/dbname') // Example for postgres
-// Option 3: Passing parameters separately (other dialects)
-// const sequelize = new Sequelize('database', 'username', 'password', {
-//   host: 'localhost',
-//   dialect: /* one of 'mysql' | 'postgres' | 'sqlite' | 'mariadb' | 'mssql' | 'db2' | 'snowflake' | 'oracle' */
-// });
 
 try {
     await sequelize.authenticate()
@@ -69,17 +62,27 @@ User.init(
 )
 
 // the defined model is the class itself
-console.log(User === sequelize.models.User) // true
+// console.log(User === sequelize.models.User) // true
 
-const user = new User({ firstName: 'bekzodbek', lastName: 'Qodirov' })
+// const user = new User({ firstName: 'bekzodbek', lastName: 'Qodirov' })
 
-console.log(user)
+// console.log(user)
 
-user.save()
-// (async () => {
-//   await sequelize.sync({ force: true });
-//   // Code here
-// })();(async () => {
-//   await sequelize.sync({ force: true });
-//   // Code here
-// })();
+// user.save()
+
+//   ; (async () => {
+//     await sequelize.sync({ force: false });false
+//     // Code here
+//   })()
+
+// const users = await User.findAll({
+//   where: {
+//     id: {
+//       [Op.eq]: 1
+//     }
+//   }
+// })
+// console.log(users);
+
+const users = await User.findByPk(2)
+console.log(users)
