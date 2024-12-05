@@ -1,132 +1,51 @@
-# Texnik Topsiriq: "Online Forum"
+Mana, TypeScript asoslari bo'yicha turli mavzularda 10 ta task (vazifa):
 
-## Loyihaning tuzilishi
+### 1. **Array (Massiv)**
 
-1. **Auth Service**
-    - Foydalanuvchilarni ro'yxatdan o'tkazish va autentifikatsiya qilish xizmatlari.
-    - JWT yordamida autentifikatsiya.
-2. **Forum Service**
-    - Forum postlari, komentariyalar, kategoriyalar va taglarni boshqarish xizmatlari.
+-   **Task**: TypeScriptda massiv yaratib, undagi elementlarning turini aniqlang. Misol: faqat `string` va `number` turidagi elementlardan iborat massiv yaratib, undan foydalaning.
+-   **Misol**:
 
-### Asosiy Jadvallar
+### 2. **Tuple (Kuple)**
 
-1. **Users Table**
-    - `user_id` (int, Primary Key)
-    - `username` (varchar, 100)
-    - `email` (varchar, 100)
-    - `password` (varchar, 100)
-    - `created_at` (timestamp)
-    - `updated_at` (timestamp)
-    - `deleted_at` (timestamp, nullable)
-2. **Posts Table**
-    - `post_id` (int, Primary Key)
-    - `user_id` (int, Foreign Key)
-    - `title` (varchar, 100)
-    - `body` (text)
-    - `category_id` (int, Foreign Key)
-    - `created_at` (timestamp)
-    - `updated_at` (timestamp)
-    - `deleted_at` (timestamp, nullable)
-3. **Comments Table**
-    - `comment_id` (int, Primary Key)
-    - `post_id` (int, Foreign Key)
-    - `user_id` (int, Foreign Key)
-    - `body` (text)
-    - `created_at` (timestamp)
-    - `updated_at` (timestamp)
-    - `deleted_at` (timestamp, nullable)
-4. **Categories Table**
-    - `category_id` (int, Primary Key)
-    - `name` (varchar, 100)
-    - `created_at` (timestamp)
-    - `updated_at` (timestamp)
-    - `deleted_at` (timestamp, nullable)
-5. **Tags Table**
-    - `tag_id` (int, Primary Key)
-    - `name` (varchar, 100)
-    - `created_at` (timestamp)
-    - `updated_at` (timestamp)
-    - `deleted_at` (timestamp, nullable)
-6. **PostTags Table**
-    - `post_id` (int, Foreign Key)
-    - `tag_id` (int, Foreign Key)
-    - `created_at` (timestamp)
+-   **Task**: Tupledan foydalanib, bir nechta turdagi ma'lumotlarni o'z ichiga olgan o'zgaruvchilar yaratib chiqing. Misol uchun: ism, yosh va tug'ilgan sana.
+-   **Misol**:
 
-### Xizmatlar
+### 3. **Type Aliases (Tur nomi aliaslari)**
 
-### 1. Auth Service
+-   **Task**: `type` yordamida yangi tur yaratib, uni bir nechta joyda ishlatishga misol keltiring. Misol: biror shaxsning malumotlari (ism, yosh, manzil).
+-   **Misol**:
 
--   **Register User**
-    -   Foydalanuvchini ro'yxatdan o'tkazish uchun endpoint.
--   **Login User**
-    -   Foydalanuvchini tizimga kiritish va JWT yaratish uchun endpoint.
--   **Get User Profile**
-    -   JWT yordamida foydalanuvchi profilini olish uchun endpoint.
+### 4. **Union Type (Ittifoq turi)**
 
-### 2. Forum Service
+-   **Task**: Union turidan foydalanib, bir o'zgaruvchiga bir nechta turdagi qiymatlarni qabul qilishini ta'minlang. Masalan, o'zgaruvchi raqam yoki matn bo'lishi mumkin.
+-   **Misol**:
 
--   **Posts CRUD**
-    -   Create, Read, Update, Delete Postlar.
--   **Comments CRUD**
-    -   Create, Read, Update, Delete Kommentariyalar.
--   **Categories CRUD**
-    -   Create, Read, Update, Delete Kategoriyalar.
--   **Tags CRUD**
-    -   Create, Read, Update, Delete Taglar.
--   **Post Tags**
-    -   Create, Read, Delete Postga tegishli taglar.
--   **Get All Posts**
-    -   Get all posts with pagination and filtering.
--   **Get All Comments**
-    -   Get all comments with pagination and filtering.
--   **Get All Categories**
-    -   Get all categories with pagination and filtering.
--   **Get All Tags**
-    -   Get all tags with pagination and filtering.
+### 5. **Function (Funktsiya)**
 
-### Qo'shimcha API-lar
+-   **Task**: TypeScriptda funksiya yaratib, uning parametr va qaytish turini aniqlang. Misol: ikkita raqamni qo'shadigan funksiya.
+-   **Misol**:
 
-1. **Get Posts by User (`user_id` bo'yicha)**
+### 6. **Literal Type (Literal tur)**
 
-    - Ma'lum bir foydalanuvchiga tegishli barcha postlarni olish.
+-   **Task**: Literal turidan foydalanib, faqat muayyan qiymatlarni qabul qiladigan o'zgaruvchi yaratish.
+-   **Misol**:
 
-    **Endpoint:** `GET /users/:user_id/posts`
+### 7. **Object Type (Obyekt turi)**
 
-2. **Get Posts by Category (`category_id` bo'yicha)**
+-   **Task**: Object turidan foydalanib, ma'lum bir tuzilishga ega obyekt yaratib, uning xususiyatlarini aniqlang.
+-   **Misol**:
 
-    - Ma'lum bir kategoriya bo'yicha barcha postlarni olish.
+### 8. **Optional Properties (Ixtiyoriy xususiyatlar)**
 
-    **Endpoint:** `GET /categories/:category_id/posts`
+-   **Task**: Ixtiyoriy xususiyatlarni aniqlang va obyekt yaratishda ba'zi xususiyatlarni o'tkazib yuboring.
+-   **Misol**:
 
-3. **Get Comments by Post (`post_id` bo'yicha)**
+### 9. **Readonly (Faoliyatni o'zgartirish mumkin bo'lmagan xususiyatlar)**
 
-    - Ma'lum bir postga tegishli barcha komentariyalarini olish.
+-   **Task**: `readonly` modifier yordamida faqat o'qiladigan (o'zgartirilmaydigan) xususiyatlarga ega obyekt yaratish.
+-   **Misol**:
 
-    **Endpoint:** `GET /posts/:post_id/comments`
+### 10. **Type Assertions (Turga oid aniqlashlar)**
 
-4. **Get Posts by Tag (`tag_id` bo'yicha)**
-
-    - Ma'lum bir tag bo'yicha barcha postlarni olish.
-
-    **Endpoint:** `GET /tags/:tag_id/posts`
-
-5. **Search Posts**
-
-    - Postlarni nomi yoki mazmuni bo'yicha qidirish.
-
-    **Endpoint:** `GET /posts/search`
-
-    **Query Parameters:**
-
-    - `title` (optional): Post nomi.
-    - `body` (optional): Post mazmuni.
-
-6. **Get Popular Tags**
-
-    - Eng ko'p ishlatilgan taglarni olish.
-
-    **Endpoint:** `GET /tags/popular`
-
-### Tekshirishlar
-
--   CRUD operatsiyalari uchun unit testlar.
+-   **Task**: Type assertion yordamida TypeScriptga ma'lum bir turga ega bo'lgan o'zgaruvchini ko'rsatish.
+-   **Misol**:
