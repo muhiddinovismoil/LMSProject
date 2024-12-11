@@ -8,19 +8,27 @@ import {
   Param,
   ParseIntPipe,
   ValidationPipe,
+  UseGuards,
+  Redirect,
+  Query,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateAuthDto } from './dto/create-auth.dto';
 import { UpdateAuthDto } from './dto/update-auth.dto';
 
 @Controller('auth')
+// @UseGuards(RoleGuard)
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   //auth/register
-  @Post('register')
+  @Get('register')
+  // @Redirect('https://google.com', 301)
+  // @UseGuards(RoleGuard)
   // @UseFilters(new HttpExceptionFilter())
-  register(@Body() createAuthDto: CreateAuthDto) {
+  register(@Body() createAuthDto: CreateAuthDto, @Query() querys: any) {
+    console.log({ querys });
+
     // throw new Error('Forbidden');
     // throw new ImATeapotException();
     return this.authService.register(createAuthDto);
