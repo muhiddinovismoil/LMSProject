@@ -1,32 +1,36 @@
-import { Injectable } from '@nestjs/common';
-
-export interface IUser {
-  email: string;
-  password: string;
-  name: string;
-  id: number;
-}
-
-const users = new Map<string, IUser>();
+import { Inject, Injectable } from '@nestjs/common';
+import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
+import { UserRepository } from './repositories/user.repository';
 
 @Injectable()
 export class UserService {
-  save(user: Omit<IUser, 'id'>) {
-    const userExists = users.has(user.email);
-    if (userExists) {
-      return `User Alaready exists!.`;
-    }
-    const id = users.size + 1;
-    users.set(user.email, { ...user, id });
-    return `created`;
+  @Inject('apiKey')
+  apiKey: string;
+  constructor(
+    @Inject('userRepo') private readonly userRepository: UserRepository,
+    @Inject('userSecret') private readonly userSecret: string,
+    @Inject('randomString') private readonly randomString: any,
+  ) {}
+  // constructor(private readonly userRepository: UserRepository) {}
+
+  create(createUserDto: CreateUserDto) {
+    return this.randomString;
   }
 
-  findOne(email: string) {
-    const userExists = users.has(email);
-    if (!userExists) {
-      return `User not found!`;
-    }
+  findAll() {
+    return this.userRepository.findAll();
+  }
 
-    return users.get(email);
+  findOne(id: number) {
+    return this.userSecret;
+  }
+
+  update(id: number, updateUserDto: UpdateUserDto) {
+    return this.apiKey;
+  }
+
+  remove(id: number) {
+    return `This action removes a #${id} user`;
   }
 }

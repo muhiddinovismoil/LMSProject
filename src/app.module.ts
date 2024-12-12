@@ -1,17 +1,13 @@
 import { Module } from '@nestjs/common';
 import { UserModule } from './user/user.module';
-import { AuthModule } from './auth/auth.module';
-import { CatModule } from './cat/cat.module';
-import { ConfigModule } from '@nestjs/config';
+import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      isGlobal: true,
-    }),
     UserModule,
-    AuthModule,
-    CatModule,
+    MongooseModule.forRoot(
+      'mongodb+srv://khkhamidullo:qwer1234@cluster0.rgtrd.mongodb.net/',
+    ),
   ],
 })
 export class AppModule {}
