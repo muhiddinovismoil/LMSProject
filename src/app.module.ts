@@ -1,6 +1,7 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { UserModule } from './user/user.module';
 import { MongooseModule } from '@nestjs/mongoose';
+import { LoggerMiddleware } from './middleware/logger.middleware';
 
 @Module({
   imports: [
@@ -10,4 +11,28 @@ import { MongooseModule } from '@nestjs/mongoose';
     ),
   ],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    console.log(consumer);
+    consumer.apply(LoggerMiddleware).forRoutes('user');
+    // consumer
+    // .apply(LoggerMiddleware)
+    // .exclude(
+    // { path: 'us*r', method: RequestMethod.GET },
+    // { path: 'user', method: RequestMethod.POST },
+    // 'user/(.*)',
+    // )
+    // .forRoutes({
+    //   path: 'us*r',
+    //   method: RequestMethod.ALL,
+    // });
+    // .forRoutes(UserController);
+    // consumer.apply(LoggerMiddleware).forRoutes(UserController);
+    // consumer.apply(LoggerMiddleware).forRoutes({
+    //   // path: 'user',
+    //   path: 'us*r',
+    //   method: RequestMethod.GET,
+    // });
+    // throw new Error('Method not implemented.');
+  }
+}

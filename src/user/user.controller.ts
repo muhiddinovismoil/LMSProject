@@ -11,6 +11,8 @@ import {
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+// import { MyCustomException } from 'src/exceptions/custom.exception';
+import { BadRequestException } from 'src/exceptions/badRequest.Exception';
 
 @Controller('user')
 export class UserController {
@@ -24,8 +26,13 @@ export class UserController {
 
   @Get()
   findAll() {
-    this.logger.log('HELLO NESTJS');
-    return this.userService.findAll();
+    throw new BadRequestException('Custom exception test ', 404, {
+      cause: new Error('A'),
+      description: 'some descs',
+    });
+    // throw new MyCustomException('Custom exception test ', new Date());
+    // this.logger.log('HELLO NESTJS');
+    // return this.userService.findAll();
   }
 
   @Get(':id')
