@@ -4,6 +4,7 @@ import { UserController } from './user.controller';
 import { UserRepository } from './repositories/user.repository';
 import { MongooseModule } from '@nestjs/mongoose';
 import { User, UserSchema } from './entities/user.entity';
+import { AuthGuard } from './guard/auth.guard';
 
 @Module({
   imports: [
@@ -35,8 +36,9 @@ import { User, UserSchema } from './entities/user.entity';
     // },
     UserRepository,
     UserService,
+    AuthGuard,
   ],
-  exports: [UserRepository, UserService],
+  exports: ['userRepo', UserRepository, UserService],
 })
 export class UserModule {}
 //   static forRoot(name: string): DynamicModule {

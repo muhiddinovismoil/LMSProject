@@ -2,6 +2,7 @@ import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { UserModule } from './user/user.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { LoggerMiddleware } from './middleware/logger.middleware';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -9,6 +10,7 @@ import { LoggerMiddleware } from './middleware/logger.middleware';
     MongooseModule.forRoot(
       'mongodb+srv://khkhamidullo:qwer1234@cluster0.rgtrd.mongodb.net/',
     ),
+    AuthModule,
   ],
 })
 export class AppModule implements NestModule {
