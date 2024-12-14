@@ -9,34 +9,43 @@ import {
   Logger,
   UseFilters,
   ParseArrayPipe,
-  UseGuards,
   Req,
+  UseGuards,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { HttpExceptionFilter } from 'src/exceptions/ http-exception.filter';
-import { AuthGuard } from './guard/auth.guard';
 import { Request } from 'express';
+import { Public } from './guard/public.guard';
+import { AuthGuard } from './guard/auth.guard';
+import { RoleGuard } from './guard/role.guard';
+import { Role } from 'src/enums/role.enum';
+import { Roles } from 'src/ decorators/roles.decorator';
+import { useContainer } from 'class-validator';
 
 interface MyRequest extends Request {
   user: any;
 }
 
+@UseGuards(RoleGuard)
+@UseGuards(AuthGuard)
 @Controller('user')
 @UseFilters(new HttpExceptionFilter('user'))
 export class UserController {
-  private readonly logger = new Logger('User');
+  private readonly logger = new Logger(useContainer.name);
+
   constructor(private readonly userService: UserService) {}
 
-  @UseGuards(AuthGuard)
+  @Roles(Role.Admin, Role.SuperAdmin)
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
     return this.userService.create(createUserDto);
   }
 
+  @Public()
   @Get()
-  @UseGuards(AuthGuard)
+  // @UseGuards(AuthGuard)
   // @UseFilters(new HttpExceptionFilter())
   findAll(@Req() req: MyRequest) {
     // @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
@@ -46,14 +55,15 @@ export class UserController {
     //   description: 'some descs',
     // });
     // this.logger.log('HELLO NESTJS');
-    console.log(req.user);
+    this.logger.log(req.user);
 
     return this.userService.findAll();
   }
 
+  @Public()
   @Get(':id')
   // findOne(@Param('id', ParseFloatPipe) id: number) {
-  findOne(@Param('id', ParseArrayPipe) id: string) {
+  findOne(@Param('id') id: string) {
     return {
       id,
       typeofId: typeof id,

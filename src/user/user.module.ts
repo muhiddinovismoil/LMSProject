@@ -5,6 +5,7 @@ import { UserRepository } from './repositories/user.repository';
 import { MongooseModule } from '@nestjs/mongoose';
 import { User, UserSchema } from './entities/user.entity';
 import { AuthGuard } from './guard/auth.guard';
+import { APP_GUARD } from '@nestjs/core';
 
 @Module({
   imports: [
@@ -33,6 +34,10 @@ import { AuthGuard } from './guard/auth.guard';
     // {
     //   provide: 'userName',
     //   useValue: "name",
+    // },
+    // {
+    //   provide: APP_GUARD,
+    //   useClass: AuthGuard,
     // },
     UserRepository,
     UserService,
