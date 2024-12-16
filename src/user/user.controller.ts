@@ -11,6 +11,7 @@ import {
   ParseArrayPipe,
   Req,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -23,13 +24,16 @@ import { RoleGuard } from './guard/role.guard';
 import { Role } from 'src/enums/role.enum';
 import { Roles } from 'src/ decorators/roles.decorator';
 import { useContainer } from 'class-validator';
+import { ExceptionInterceptor } from './user.interceptor';
 
 interface MyRequest extends Request {
   user: any;
 }
 
-@UseGuards(RoleGuard)
-@UseGuards(AuthGuard)
+// @UseGuards(RoleGuard)
+// @UseGuards(AuthGuard)
+// /@UseInterceptors(UserInterceptor)
+@UseInterceptors(ExceptionInterceptor)
 @Controller('user')
 @UseFilters(new HttpExceptionFilter('user'))
 export class UserController {
@@ -64,6 +68,7 @@ export class UserController {
   @Get(':id')
   // findOne(@Param('id', ParseFloatPipe) id: number) {
   findOne(@Param('id') id: string) {
+    if (+id == 1) throw new Error('id must be greter than 1');
     return {
       id,
       typeofId: typeof id,
