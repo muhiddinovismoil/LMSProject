@@ -1,27 +1,35 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument } from 'mongoose';
-import { Role } from 'src/enums/role.enum';
+import { Table, Column, Model, HasMany, DataType } from 'sequelize-typescript';
+import { Blog } from 'src/blog/entities/blog.entity';
 
-export type UserDocument = HydratedDocument<User>;
+@Table({ tableName: 'USER' })
+export class User extends Model {
+  @Column({
+    type: DataType.BIGINT,
+    allowNull: false,
+    autoIncrement: true,
+    unique: true,
+    primaryKey: true,
+  })
+  public id: number;
 
-@Schema()
-export class User {
-  @Prop()
+  @Column
   name: string;
 
-  @Prop()
+  @Column
   age: number;
 
-  @Prop()
+  @Column
   gender: string;
-  @Prop({ required: true, unique: true })
-  email: string;
 
-  @Prop({ required: true })
-  password: string;
+  @Column
+  status: string;
 
-  @Prop({ enum: [Role.Admin, Role.SuperAdmin, Role.User], default: Role.User })
-  role: Role;
+  @Column
+  is_merried: boolean;
+
+  @Column
+  role: string;
+
+  @HasMany(() => Blog)
+  blogs: Blog[];
 }
-
-export const UserSchema = SchemaFactory.createForClass(User);
