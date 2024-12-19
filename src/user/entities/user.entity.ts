@@ -1,8 +1,8 @@
 import { Table, Column, Model, DataType } from 'sequelize-typescript';
-import { Roles } from 'src/common/enums/role';
+import { Role } from 'src/common/enums/role';
 import { UserStatus } from 'src/common/enums/user.status';
 
-@Table({ tableName: 'USER' })
+@Table({ tableName: 'users' })
 export class User extends Model {
   @Column({
     type: DataType.BIGINT,
@@ -25,13 +25,20 @@ export class User extends Model {
 
   @Column({
     type: DataType.STRING,
+    unique: true,
+    allowNull: false,
+  })
+  email: string;
+  @Column({
+    type: DataType.STRING,
     allowNull: false,
   })
   password: string;
 
   @Column
   age: number;
-
+  @Column
+  profile_log: string;
   @Column
   gender: string;
 
@@ -42,8 +49,8 @@ export class User extends Model {
   status: UserStatus;
 
   @Column({
-    type: DataType.ENUM(...Object.values(Roles)),
-    defaultValue: Roles.student,
+    type: DataType.ENUM(...Object.values(Role)),
+    defaultValue: Role.student,
   })
-  role: Roles;
+  role: Role;
 }

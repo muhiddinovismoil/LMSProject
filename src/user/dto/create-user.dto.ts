@@ -6,8 +6,9 @@ import {
   IsStrongPassword,
   Max,
   Min,
+  IsEmail,
 } from 'class-validator';
-import { Roles } from 'src/common/enums/role';
+import { Role } from 'src/common/enums/role';
 import { UserStatus } from 'src/common/enums/user.status';
 
 export class CreateUserDto {
@@ -28,6 +29,12 @@ export class CreateUserDto {
   @Min(3)
   @Max(50)
   username: string;
+  @ApiProperty({
+    type: String,
+    description: 'User email',
+  })
+  @IsEmail()
+  email: string;
 
   @ApiProperty({
     type: String,
@@ -43,6 +50,12 @@ export class CreateUserDto {
   })
   @IsNumber()
   age: number;
+  @ApiProperty({
+    type: Number,
+    description: "User's logo",
+  })
+  @IsString()
+  profile_log: string;
 
   @ApiProperty({
     type: String,
@@ -61,7 +74,7 @@ export class CreateUserDto {
   @ApiProperty({
     type: String,
     description: 'User role  default student',
-    enum: Roles,
+    enum: Role,
   })
   role: string;
 }

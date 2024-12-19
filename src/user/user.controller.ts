@@ -8,14 +8,14 @@ import {
   Delete,
   UseInterceptors,
   UploadedFile,
+  Put,
 } from '@nestjs/common';
 import { UserService } from './user.service';
-import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { Express } from 'express';
-import { diskStorage, memoryStorage } from 'multer';
+import { memoryStorage } from 'multer';
 import { ImageKitService } from 'imagekit-nestjs';
+import { resetPasswordSchem } from 'src/auth/dto/update-password';
 
 @Controller('user')
 export class UserController {
@@ -23,35 +23,23 @@ export class UserController {
     private readonly imageKitService: ImageKitService,
     private readonly userService: UserService,
   ) {}
-
-  @Post()
-  create(@Body() createUserDto: CreateUserDto) {
-    console.log(createUserDto);
-
-    return this.userService.create(createUserDto);
+  @Get('/me/:id')
+  getMe(@Param('id') id: string) {
+    return this.userService.getProfile(+id);
   }
-
-  @Get()
-  findAll() {
-    return this.userService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.userService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+  @Put('/update/:id')
+  updateData(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.userService.update(+id, updateUserDto);
   }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
+  @Patch('/updatePassword')
+  update(@Body() updatePassDto: resetPasswordSchem) {
+    return this.userService.updatePass(updatePassDto);
+  }
+  @Delete('/delete/:id')
+  deleteUser(@Param('id') id: string) {
     return this.userService.remove(+id);
   }
-
-  @Post('profile')
+  @Post('/avatar/:id')
   // @UseInterceptors(
   //   FileInterceptor('avatar', {
   //     storage: diskStorage({
@@ -77,17 +65,12 @@ export class UserController {
       storage: memoryStorage(),
     }),
   )
-  async uploadFile(@UploadedFile() file) {
-    console.log(file);
-
+  async uploadFile(@UploadedFile() file, @Param('id') id: string) {
     const fileBase64 = file.buffer.toString('base64');
-
     const result = await this.imageKitService.upload({
       file: fileBase64,
       fileName: file.originalname,
     });
-    console.log(result);
-
-    return result.url;
+    return await this.userService.setLogo(+id, result.thumbnailUrl);
   }
 }

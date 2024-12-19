@@ -1,15 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, IsStrongPassword } from 'class-validator';
-import { Max, Min } from 'sequelize-typescript';
+import { IsEmail, IsString, IsStrongPassword } from 'class-validator';
 
 export class SignInAuthDto {
   @ApiProperty({
     type: String,
     description: 'User username',
   })
-  @IsString()
-  @Min(3)
-  @Max(50)
+  @IsEmail()
   username: string;
 
   @ApiProperty({

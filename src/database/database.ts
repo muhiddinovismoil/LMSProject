@@ -1,6 +1,6 @@
 import { Sequelize } from 'sequelize-typescript';
 import { User } from '../user/entities/user.entity';
-
+import { OTP } from 'src/user/entities/otp.entity';
 export const databaseProviders = [
   {
     provide: 'SEQUELIZE',
@@ -9,15 +9,12 @@ export const databaseProviders = [
         dialect: 'postgres',
         host: 'localhost',
         port: 5432,
-        username: 'postgres', //sizning username
-        password: 'postgres', // sizning passwortiz
-        database: 'postgres', //sizning database
+        username: 'postgres',
+        password: '1111',
+        database: 'postgres',
       });
-      sequelize.addModels([User]);
-      await sequelize.sync({
-        force: true,
-      });
-
+      sequelize.addModels([User, OTP]);
+      await sequelize.sync();
       return sequelize;
     },
   },

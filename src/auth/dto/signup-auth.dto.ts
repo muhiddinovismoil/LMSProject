@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import {
+  IsEmail,
   IsNumber,
   IsOptional,
   IsString,
@@ -7,7 +8,7 @@ import {
   Max,
   Min,
 } from 'class-validator';
-import { Roles } from 'src/common/enums/role';
+import { Role } from 'src/common/enums/role';
 import { UserStatus } from 'src/common/enums/user.status';
 
 export class SignUpAuthDto {
@@ -28,6 +29,13 @@ export class SignUpAuthDto {
   @Min(3)
   @Max(50)
   username: string;
+
+  @ApiProperty({
+    type: String,
+    description: 'User email',
+  })
+  @IsEmail()
+  email: string;
 
   @ApiProperty({
     type: String,
@@ -61,7 +69,7 @@ export class SignUpAuthDto {
   @ApiProperty({
     type: String,
     description: 'User role  default student',
-    enum: Roles,
+    enum: Role,
   })
   role: string;
 }

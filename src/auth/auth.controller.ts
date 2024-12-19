@@ -1,15 +1,8 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
+import { Controller, Post, Body, Delete } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { SignUpAuthDto } from './dto/signup-auth.dto';
-import { UpdateAuthDto } from './dto/update-auth.dto';
+import { forgetPasswordSchem } from './dto/update-password';
+import { SignInAuthDto } from './dto/signin-auth.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -21,27 +14,30 @@ export class AuthController {
   }
 
   @Post('signin')
-  login(@Body() createAuthDto: SignUpAuthDto) {
-    return this.authService.login(createAuthDto);
+  login(@Body() signInAuthDto: SignInAuthDto) {
+    return this.authService.login(signInAuthDto);
   }
 
-  @Get()
-  findAll() {
-    return this.authService.findAll();
+  @Post('verify')
+  verify(@Body('email') email: string, @Body('otp_code') otp_code: string) {
+    return this.authService.verifyOtp(email, otp_code);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.authService.findOne(+id);
+  @Delete('logout')
+  logOut() {
+    return this.authService.logout();
+  }
+  @Post('otp-forget-password')
+  otpForgetPassword(@Body('email') email: string) {
+    return this.authService.newOtpVerification(email);
+  }
+  @Post('refreshToken')
+  refreshAccessToken(@Body('refreshToken') refreshToken: string) {
+    return this.authService.tokenRefresh(refreshToken);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAuthDto: UpdateAuthDto) {
-    return this.authService.update(+id, updateAuthDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.authService.remove(+id);
+  @Post('forgetPassword')
+  forgetPassword(@Body() forgetPassSchem: forgetPasswordSchem) {
+    return this.authService.forgetPassword(forgetPassSchem);
   }
 }
