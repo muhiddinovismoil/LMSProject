@@ -16,23 +16,19 @@ export class AuthService {
     return this.userReposity.create(signInAuthDto);
   }
 
-  async otp() {
-    return this.userReposity.create(signInAuthDto);
-  }
-
   findAll() {
     return `This action returns all auth`;
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} auth`;
+    return this.userReposity.findOne(id);
   }
 
   update(id: number, updateAuthDto: UpdateAuthDto) {
-    return `This action updates a #${id} auth`;
+    return this.userReposity.update(id, updateAuthDto);
   }
 
   remove(id: number) {
-    return `This action removes a #${id} auth`;
+    return this.userReposity.remove(id);
   }
 }
