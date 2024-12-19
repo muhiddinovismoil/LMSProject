@@ -10,7 +10,7 @@ import {
 import { Roles } from 'src/common/enums/role';
 import { UserStatus } from 'src/common/enums/user.status';
 
-export class CreateUserDto {
+export class SignUpAuthDto {
   @ApiProperty({
     type: String,
     description: 'User name',

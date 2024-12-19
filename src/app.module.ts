@@ -1,21 +1,19 @@
-import { Inject, Module } from '@nestjs/common';
-import { DatabaseModule } from './database/database.module';
-import { UserModule } from './user/user.module';
-import { BlogModule } from './blog/blog.module';
+import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+
 import { ImageKitModule } from 'imagekit-nestjs';
+import { DatabaseModule } from './database/database.module';
+import { UserModule } from './user/user.module';
 import { ImageKitConfig } from './configs/imagekit.config';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'uploads'),
       serveRoot: '/files',
-
-      // renderPath: '/static',
-      // serveStaticOptions:
     }),
     ImageKitModule.forRootAsync({
       useFactory: ImageKitConfig,
@@ -23,17 +21,12 @@ import { ImageKitConfig } from './configs/imagekit.config';
       imports: [ConfigModule],
       isGlobal: true,
     }),
-    // NestjsGrammyModule.forRootAsync({
-    //   import: [ConfigModule],
-    //   useFactory: async (configService: ConfigService) => ({
-    //     token: configService.get<string>('BOT_TOKEN'),
-    //   }),
-    //   Inject: [ConfigService],
-    // }),
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     DatabaseModule,
     UserModule,
-    BlogModule,
+    AuthModule,
   ],
 })
 export class AppModule {}

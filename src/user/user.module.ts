@@ -3,7 +3,7 @@ import { UserService } from './user.service';
 import { UserController } from './user.controller';
 import { userProviders } from './ user.providers';
 import { MulterModule } from '@nestjs/platform-express';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { UserRepository } from './repositories/user.repository';
 
 @Module({
   imports: [
@@ -19,6 +19,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     }),
   ],
   controllers: [UserController],
-  providers: [UserService, ...userProviders],
+  providers: [UserService, ...userProviders, UserRepository],
+  exports: [UserRepository],
 })
 export class UserModule {}

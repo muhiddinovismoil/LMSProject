@@ -1,6 +1,5 @@
 import { Sequelize } from 'sequelize-typescript';
 import { User } from '../user/entities/user.entity';
-import { Blog } from 'src/blog/entities/blog.entity';
 
 export const databaseProviders = [
   {
@@ -14,9 +13,9 @@ export const databaseProviders = [
         password: 'postgres', // sizning passwortiz
         database: 'postgres', //sizning database
       });
-      sequelize.addModels([User, Blog]);
+      sequelize.addModels([User]);
       await sequelize.sync({
-        // force: true,
+        force: true,
       });
 
       return sequelize;
