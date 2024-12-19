@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Inject, Module } from '@nestjs/common';
 import { DatabaseModule } from './database/database.module';
 import { UserModule } from './user/user.module';
 import { BlogModule } from './blog/blog.module';
@@ -23,6 +23,13 @@ import { ImageKitConfig } from './configs/imagekit.config';
       imports: [ConfigModule],
       isGlobal: true,
     }),
+    // NestjsGrammyModule.forRootAsync({
+    //   import: [ConfigModule],
+    //   useFactory: async (configService: ConfigService) => ({
+    //     token: configService.get<string>('BOT_TOKEN'),
+    //   }),
+    //   Inject: [ConfigService],
+    // }),
     ConfigModule.forRoot(),
     DatabaseModule,
     UserModule,
