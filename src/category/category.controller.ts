@@ -22,11 +22,13 @@ export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
 
   @Post()
+  @UseGuards(AuthGuard)
   create(@Body() createCategoryDto: CreateCategoryDto) {
     return this.categoryService.create(createCategoryDto);
   }
 
   @Get()
+  @UseGuards(AuthGuard)
   findAll(@Query('limit') limit: number, @Query('offset') offset: number) {
     return this.categoryService.findAll(
       Number(limit) || 10,
@@ -35,6 +37,7 @@ export class CategoryController {
   }
 
   @Get(':id')
+  @UseGuards(AuthGuard)
   findOne(@Param('id') id: string) {
     return this.categoryService.findOne(+id);
   }

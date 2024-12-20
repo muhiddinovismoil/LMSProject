@@ -22,16 +22,19 @@ export class CourseController {
   constructor(private readonly courseService: CourseService) {}
 
   @Post()
+  @UseGuards(AuthGuard)
   create(@Body() createCourseDto: CreateCourseDto) {
     return this.courseService.create(createCourseDto);
   }
 
   @Get()
+  @UseGuards(AuthGuard)
   findAll(@Query('limit') limit: number, @Query('offset') offset: number) {
     return this.courseService.findAll(Number(limit) || 10, Number(offset) || 0);
   }
 
   @Get(':id')
+  @UseGuards(AuthGuard)
   findOne(@Param('id') id: string) {
     return this.courseService.findOne(+id);
   }

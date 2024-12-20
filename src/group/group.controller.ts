@@ -22,16 +22,19 @@ export class GroupController {
   constructor(private readonly groupService: GroupService) {}
 
   @Post()
+  @UseGuards(AuthGuard)
   create(@Body() createGroupDto: CreateGroupDto) {
     return this.groupService.create(createGroupDto);
   }
 
   @Get()
+  @UseGuards(AuthGuard)
   findAll(@Query('limit') limit: number, @Query('offset') offset: number) {
     return this.groupService.findAll(Number(limit) || 10, Number(offset) || 0);
   }
 
   @Get(':id')
+  @UseGuards(AuthGuard)
   findOne(@Param('id') id: string) {
     return this.groupService.findOne(+id);
   }
