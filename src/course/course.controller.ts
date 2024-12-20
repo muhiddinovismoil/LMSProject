@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Query,
+} from '@nestjs/common';
 import { CourseService } from './course.service';
 import { CreateCourseDto } from './dto/create-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
@@ -13,8 +22,8 @@ export class CourseController {
   }
 
   @Get()
-  findAll() {
-    return this.courseService.findAll();
+  findAll(@Query('limit') limit: number, @Query('offset') offset: number) {
+    return this.courseService.findAll(Number(limit) || 10, Number(offset) || 0);
   }
 
   @Get(':id')

@@ -1,26 +1,44 @@
 import { Injectable } from '@nestjs/common';
 import { CreateGroupDto } from './dto/create-group.dto';
 import { UpdateGroupDto } from './dto/update-group.dto';
+import { GroupRepository } from './repository/group.repository';
 
 @Injectable()
 export class GroupService {
-  create(createGroupDto: CreateGroupDto) {
-    return 'This action adds a new group';
+  constructor(private readonly groupRepository: GroupRepository) {}
+  async create(createGroupDto: CreateGroupDto) {
+    try {
+      return await this.groupRepository.createGroup(createGroupDto);
+    } catch (error) {
+      return error;
+    }
   }
-
-  findAll() {
-    return `This action returns all group`;
+  async findAll(limit: number, offset: number) {
+    try {
+      return await this.groupRepository.getAllGroup(limit, offset);
+    } catch (error) {
+      return error;
+    }
   }
-
-  findOne(id: number) {
-    return `This action returns a #${id} group`;
+  async findOne(id: number) {
+    try {
+      return await this.groupRepository.getGroupById(id);
+    } catch (error) {
+      return error;
+    }
   }
-
-  update(id: number, updateGroupDto: UpdateGroupDto) {
-    return `This action updates a #${id} group`;
+  async update(id: number, updateGroupDto: UpdateGroupDto) {
+    try {
+      return await this.groupRepository.updateGroupById(id, updateGroupDto);
+    } catch (error) {
+      return error;
+    }
   }
-
-  remove(id: number) {
-    return `This action removes a #${id} group`;
+  async remove(id: number) {
+    try {
+      return await this.groupRepository.deleteGroupById(id);
+    } catch (error) {
+      return error;
+    }
   }
 }

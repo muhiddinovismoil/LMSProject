@@ -1,26 +1,44 @@
 import { Injectable } from '@nestjs/common';
 import { CreateCourseDto } from './dto/create-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
+import { CourseRepository } from './repository/course.repository';
 
 @Injectable()
 export class CourseService {
-  create(createCourseDto: CreateCourseDto) {
-    return 'This action adds a new course';
+  constructor(private readonly courseRepository: CourseRepository) {}
+  async create(createCourseDto: CreateCourseDto) {
+    try {
+      return await this.courseRepository.createCourse(createCourseDto);
+    } catch (error) {
+      return error;
+    }
   }
-
-  findAll() {
-    return `This action returns all course`;
+  async findAll(limit: number, offset: number) {
+    try {
+      return await this.courseRepository.getAllCourse(limit, offset);
+    } catch (error) {
+      return error;
+    }
   }
-
-  findOne(id: number) {
-    return `This action returns a #${id} course`;
+  async findOne(id: number) {
+    try {
+      return await this.courseRepository.getCourseById(id);
+    } catch (error) {
+      return error;
+    }
   }
-
-  update(id: number, updateCourseDto: UpdateCourseDto) {
-    return `This action updates a #${id} course`;
+  async update(id: number, updateCourseDto: UpdateCourseDto) {
+    try {
+      return await this.courseRepository.updateCourseById(id, updateCourseDto);
+    } catch (error) {
+      return error;
+    }
   }
-
-  remove(id: number) {
-    return `This action removes a #${id} course`;
+  async remove(id: number) {
+    try {
+      return await this.courseRepository.deleteCourseById(id);
+    } catch (error) {
+      return error;
+    }
   }
 }
