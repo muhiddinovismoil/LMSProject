@@ -3,14 +3,19 @@ import {
   Get,
   Post,
   Body,
-  Patch,
   Param,
   Delete,
   Query,
+  UseGuards,
+  Put,
 } from '@nestjs/common';
 import { GroupService } from './group.service';
 import { CreateGroupDto } from './dto/create-group.dto';
 import { UpdateGroupDto } from './dto/update-group.dto';
+import { Role } from 'src/common/enums/role';
+import { Roles } from 'src/common/decorator/role.decorator';
+import { AuthGuard } from 'src/guards/auth.guard';
+import { RoleGuard } from 'src/guards/role.guard';
 
 @Controller('group')
 export class GroupController {
@@ -30,12 +35,14 @@ export class GroupController {
   findOne(@Param('id') id: string) {
     return this.groupService.findOne(+id);
   }
-
-  @Patch(':id')
+  @UseGuards(AuthGuard, RoleGuard)
+  @Roles(Role.manager)
+  @Put(':id')
   update(@Param('id') id: string, @Body() updateGroupDto: UpdateGroupDto) {
     return this.groupService.update(+id, updateGroupDto);
   }
-
+  @UseGuards(AuthGuard, RoleGuard)
+  @Roles(Role.manager)
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.groupService.remove(+id);

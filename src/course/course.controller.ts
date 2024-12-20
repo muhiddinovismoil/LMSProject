@@ -3,14 +3,19 @@ import {
   Get,
   Post,
   Body,
-  Patch,
   Param,
   Delete,
   Query,
+  UseGuards,
+  Put,
 } from '@nestjs/common';
 import { CourseService } from './course.service';
 import { CreateCourseDto } from './dto/create-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
+import { RoleGuard } from 'src/guards/role.guard';
+import { AuthGuard } from 'src/guards/auth.guard';
+import { Roles } from 'src/common/decorator/role.decorator';
+import { Role } from 'src/common/enums/role';
 
 @Controller('course')
 export class CourseController {
@@ -30,12 +35,14 @@ export class CourseController {
   findOne(@Param('id') id: string) {
     return this.courseService.findOne(+id);
   }
-
-  @Patch(':id')
+  @UseGuards(AuthGuard, RoleGuard)
+  @Roles(Role.manager)
+  @Put(':id')
   update(@Param('id') id: string, @Body() updateCourseDto: UpdateCourseDto) {
     return this.courseService.update(+id, updateCourseDto);
   }
-
+  @UseGuards(AuthGuard, RoleGuard)
+  @Roles(Role.manager)
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.courseService.remove(+id);

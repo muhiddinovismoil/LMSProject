@@ -9,6 +9,7 @@ import {
   UseInterceptors,
   UploadedFile,
   Put,
+  UseGuards,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -16,6 +17,10 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { memoryStorage } from 'multer';
 import { ImageKitService } from 'imagekit-nestjs';
 import { resetPasswordSchem } from 'src/auth/dto/update-password';
+import { AuthGuard } from 'src/guards/auth.guard';
+import { RoleGuard } from 'src/guards/role.guard';
+import { Roles } from 'src/common/decorator/role.decorator';
+import { Role } from 'src/common/enums/role';
 
 @Controller('user')
 export class UserController {
@@ -35,6 +40,8 @@ export class UserController {
   update(@Body() updatePassDto: resetPasswordSchem) {
     return this.userService.updatePass(updatePassDto);
   }
+  @UseGuards(AuthGuard, RoleGuard)
+  @Roles(Role.manager)
   @Delete('/delete/:id')
   deleteUser(@Param('id') id: string) {
     return this.userService.remove(+id);
