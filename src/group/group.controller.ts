@@ -12,10 +12,10 @@ import {
 import { GroupService } from './group.service';
 import { CreateGroupDto } from './dto/create-group.dto';
 import { UpdateGroupDto } from './dto/update-group.dto';
-import { Role } from 'src/common/enums/role';
-import { Roles } from 'src/common/decorator/role.decorator';
-import { AuthGuard } from 'src/guards/auth.guard';
-import { RoleGuard } from 'src/guards/role.guard';
+import { Role } from '../common/enums/role';
+import { Roles } from '../common/decorator/role.decorator';
+import { AuthGuard } from '../guards/auth.guard';
+import { RoleGuard } from '../guards/role.guard';
 
 @Controller('group')
 export class GroupController {

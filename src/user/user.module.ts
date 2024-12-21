@@ -5,7 +5,7 @@ import { userProviders } from './ user.providers';
 import { MulterModule } from '@nestjs/platform-express';
 import { UserRepository } from './repositories/user.repository';
 import { MailerModule } from '@nestjs-modules/mailer';
-import { EmailConfig } from 'src/configs/email';
+import { EmailConfig } from '../configs/email';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({

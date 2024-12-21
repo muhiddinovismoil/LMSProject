@@ -3,22 +3,22 @@ import { IsNumber, IsString, Max, Min } from 'class-validator';
 export class CreateCourseDto {
   @ApiProperty({
     type: String,
-    description: "Category's name",
+    description: "Course's name",
   })
   @IsString()
   @Min(3)
   @Max(15)
   name: string;
-  @IsString()
   @ApiProperty({
     type: String,
-    description: "Category's description",
+    description: "Course's description",
   })
+  @IsString()
   description: string;
-  @IsNumber()
   @ApiProperty({
     type: Number,
-    description: "Category's description",
+    description: "Course's category_id",
   })
+  @IsNumber()
   category_id: number;
 }

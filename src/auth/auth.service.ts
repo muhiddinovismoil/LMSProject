@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { SignUpAuthDto } from './dto/signup-auth.dto';
-import { UserRepository } from 'src/user/repositories/user.repository';
+import { UserRepository } from '../user/repositories/user.repository';
 import { SignInAuthDto } from './dto/signin-auth.dto';
 import { forgetPasswordSchem } from './dto/update-password';
 

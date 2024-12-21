@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { GroupService } from './group.service';
 import { GroupController } from './group.controller';
 import { GroupRepository } from './repository/group.repository';
-import { DatabaseModule } from 'src/database/database.module';
+import { DatabaseModule } from '../database/database.module';
 import { groupProvider } from './group.provider';
 
 @Module({

@@ -1,7 +1,7 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { Group } from '../entities/group.entity';
 import { CreateGroupDto } from '../dto/create-group.dto';
-import { UpdateCourseDto } from 'src/course/dto/update-course.dto';
+import { UpdateCourseDto } from '../../course/dto/update-course.dto';
 
 @Injectable()
 export class GroupRepository {

@@ -8,8 +8,8 @@ import {
   Max,
   Min,
 } from 'class-validator';
-import { Role } from 'src/common/enums/role';
-import { UserStatus } from 'src/common/enums/user.status';
+import { Role } from '../../common/enums/role';
+import { UserStatus } from '../../common/enums/user.status';
 
 export class SignUpAuthDto {
   @ApiProperty({

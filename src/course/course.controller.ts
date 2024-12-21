@@ -12,10 +12,10 @@ import {
 import { CourseService } from './course.service';
 import { CreateCourseDto } from './dto/create-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
-import { RoleGuard } from 'src/guards/role.guard';
-import { AuthGuard } from 'src/guards/auth.guard';
-import { Roles } from 'src/common/decorator/role.decorator';
-import { Role } from 'src/common/enums/role';
+import { RoleGuard } from '../guards/role.guard';
+import { AuthGuard } from '../guards/auth.guard';
+import { Roles } from '../common/decorator/role.decorator';
+import { Role } from '../common/enums/role';
 
 @Controller('course')
 export class CourseController {

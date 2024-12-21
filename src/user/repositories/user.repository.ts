@@ -8,20 +8,20 @@ import {
 } from '@nestjs/common';
 import { User } from '../entities/user.entity';
 import { UpdateUserDto } from '../dto/update-user.dto';
-import { checkPassword, hashingPassword } from 'src/helpers/hashing';
-import { SignInAuthDto } from 'src/auth/dto/signin-auth.dto';
+import { checkPassword, hashingPassword } from '../../helpers/hashing';
+import { SignInAuthDto } from '../../auth/dto/signin-auth.dto';
 import { JwtService } from '@nestjs/jwt';
-import { jwtConstants } from 'src/common/constants/jwt.contsant';
+import { jwtConstants } from '../../common/constants/jwt.contsant';
 import { OTP } from '../entities/otp.entity';
-import { generateOtp } from 'src/helpers/otp';
-import { sendEmail } from 'src/helpers/sendMail';
+import { generateOtp } from '../../helpers/otp';
+import { sendEmail } from '../../helpers/sendMail';
 import { MailerService } from '@nestjs-modules/mailer';
-import { SignUpAuthDto } from 'src/auth/dto/signup-auth.dto';
-import { UserStatus } from 'src/common/enums/user.status';
+import { SignUpAuthDto } from '../../auth/dto/signup-auth.dto';
+import { UserStatus } from '../../common/enums/user.status';
 import {
   forgetPasswordSchem,
   resetPasswordSchem,
-} from 'src/auth/dto/update-password';
+} from '../../auth/dto/update-password';
 
 @Injectable()
 export class UserRepository {

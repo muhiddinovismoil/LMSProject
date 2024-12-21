@@ -5,7 +5,7 @@ import {
   DataType,
   ForeignKey,
 } from 'sequelize-typescript';
-import { Course } from 'src/course/entities/course.entity';
+import { Course } from '../../course/entities/course.entity';
 
 @Table({ tableName: 'groups', timestamps: true, paranoid: true })
 export class Group extends Model<Group> {

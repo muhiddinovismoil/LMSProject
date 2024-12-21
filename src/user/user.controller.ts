@@ -16,11 +16,11 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { memoryStorage } from 'multer';
 import { ImageKitService } from 'imagekit-nestjs';
-import { resetPasswordSchem } from 'src/auth/dto/update-password';
-import { AuthGuard } from 'src/guards/auth.guard';
-import { RoleGuard } from 'src/guards/role.guard';
-import { Roles } from 'src/common/decorator/role.decorator';
-import { Role } from 'src/common/enums/role';
+import { resetPasswordSchem } from '../auth/dto/update-password';
+import { AuthGuard } from '../guards/auth.guard';
+import { RoleGuard } from '../guards/role.guard';
+import { Roles } from '../common/decorator/role.decorator';
+import { Role } from '../common/enums/role';
 
 @Controller('user')
 export class UserController {
