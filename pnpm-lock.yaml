@@ -792,7 +792,7 @@ packages:
   '@jridgewell/source-map@0.3.6':
     resolution:
       {
-        integrity: sha512-1ZJTZebgqllO79ue2bm3rIGud/bOe0pP5Bj..RxxYkEZS8STV7zN84UBbiYu7jy+eCKSnVIUgoWWE/tt+shMQ==,
+        integrity: sha512-1ZJTZebgqllO79ue2bm3rIGud/bOe0pP5BjSRCRxxYkEZS8STV7zN84UBbiYu7jy+eCKSnVIUgoWWE/tt+shMQ==,
       }
 
   '@jridgewell/sourcemap-codec@1.5.0':
@@ -4506,7 +4506,7 @@ packages:
   jest-regex-util@29.6.3:
     resolution:
       {
-        integrity: sha512-KJJB..yyLNWCNBOvZyRDnAIfUiRJ8v+hOBQYGn8gDyF3UegwiP4gwRR3/SDa42g1YbVycTidUF3rKjyLFDWbg==,
+        integrity: sha512-KJJBsRCyyLNWCNBOvZyRDnAIfUiRJ8v+hOBQYGn8gDyF3UegwiP4gwRR3/SDa42g1YbVycTidUF3rKjyLFDWbg==,
       }
     engines: { node: ^14.15.0 || ^16.10.0 || >=18.0.0 }
 

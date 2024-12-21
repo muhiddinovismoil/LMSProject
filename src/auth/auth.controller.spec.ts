@@ -20,6 +20,6 @@ describe('AuthController', () => {
   });
 
   it('should be defined', () => {
-    expect(controller).toBeTruthy();
+    expect(controller).toBeDefined();
   });
 });
