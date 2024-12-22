@@ -33,11 +33,9 @@ export class GroupRepository {
   }
   async createGroup(createGroupDto: CreateGroupDto) {
     try {
-      const newGroup = new this.groupModel({ ...createGroupDto });
-      await newGroup.save();
+      await this.groupModel.create({ ...createGroupDto });
       return {
         message: 'Group created',
-        newMeal: newGroup.id,
       };
     } catch (error) {
       return error;
@@ -49,10 +47,7 @@ export class GroupRepository {
       if (!find) {
         throw new NotFoundException('Group not found');
       }
-      await this.groupModel.update(
-        { ...updateGroupDto },
-        { where: { id: find.id } },
-      );
+      await this.groupModel.update(updateGroupDto, { where: { id: id } });
       return {
         msg: 'Group updated',
         updatedGroupId: id,

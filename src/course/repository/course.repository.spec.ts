@@ -85,7 +85,7 @@ describe('CourseRepository', () => {
       };
       (mockCourseModel.create as jest.Mock).mockResolvedValue(mockCourse);
       const result = await courseRepository.createCourse(mockCourse);
-      expect(mockCourseModel.create).toHaveBeenCalled();
+      expect(mockCourseModel.create).toHaveBeenCalledWith(mockCourse);
       expect(result).toEqual({
         msg: 'New Course created',
       });
