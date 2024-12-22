@@ -33,11 +33,9 @@ export class CourseRepository {
   }
   async createCourse(createCourseDto: CreateCourseDto) {
     try {
-      const newCourse = new this.courseModel({ ...createCourseDto });
-      await newCourse.save();
+      await this.courseModel.create({ ...createCourseDto });
       return {
         msg: 'New Course created',
-        courseId: newCourse.id,
       };
     } catch (error) {
       return error;
