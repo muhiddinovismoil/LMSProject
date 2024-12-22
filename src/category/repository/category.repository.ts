@@ -42,11 +42,11 @@ export class CategoryRepository {
   }
   async createCategory(createCategoryDto: CreateCategoryDto) {
     try {
-      const newCategory = new this.categoryModel({ ...createCategoryDto });
-      await newCategory.save();
+      await this.categoryModel.create({
+        ...createCategoryDto,
+      });
       return {
         msg: 'Category Created',
-        categoryId: newCategory.id,
       };
     } catch (error) {
       return error;
@@ -60,10 +60,7 @@ export class CategoryRepository {
       if (!getCategory) {
         throw new NotFoundException('Category not found');
       }
-      await this.categoryModel.update(
-        { ...updateCategoryDto },
-        { where: { id: id } },
-      );
+      await this.categoryModel.update(updateCategoryDto, { where: { id: id } });
       return {
         msg: 'Category Updated',
         updatedCategoryId: id,
@@ -78,6 +75,7 @@ export class CategoryRepository {
       if (!find) {
         throw new NotFoundException('Category not found');
       }
+      await this.categoryModel.destroy({ where: { id: id } });
       return {
         msg: 'Category deleted',
         deletedCategoryId: id,
