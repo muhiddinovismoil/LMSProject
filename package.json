@@ -23,6 +23,7 @@
     "node": ">=16.0.0"
   },
   "dependencies": {
+    "@microsoft/tsdoc": "^0.15.1",
     "@nestjs-modules/mailer": "^2.0.2",
     "@nestjs/common": "^10.3.2",
     "@nestjs/config": "^3.3.0",
